@@ -33,9 +33,9 @@ function! SCTags()
                 \ 'T:types',
                 \ 't:traits',
                 \ 'o:objects',
-                \ 'O:cobjects',
+                \ 'O:case objects',
                 \ 'c:classes',
-                \ 'C:cclasses',
+                \ 'C:case classes',
                 \ 'm:methods:1'
             \ ],
             \ 'kind2scope'  : {
