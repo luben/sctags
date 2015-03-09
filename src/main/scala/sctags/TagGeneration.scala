@@ -32,6 +32,7 @@ trait TagGeneration { this: SCTags.type =>
         case (m: MemberDef) if m.mods.hasAbstractFlag => Some("abstract")
         case (m: MemberDef) if m.mods.isImplicit      => Some("implicit")
         case (m: MemberDef) if m.mods.isSealed        => Some("sealed")
+        case (m: MemberDef) if m.mods.isLazy          => Some("lazy")
         case _ => None
       }
 
