@@ -4,7 +4,7 @@ Usage
 -----
 
 ```
-  sctags [-f|-o file] [-r|--recurse] [-v|--version] <files>
+sctags [-f|-o file] [-r|--recurse] [-v|--version] <files>
 
 -f file | -o file
   sets the file the tags are written to, default is "tags"
