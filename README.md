@@ -19,7 +19,7 @@ sctags [-f|-o file] [-r|--recurse] [-v|--version] <files>
 
 Example Vim + TagBar config
 ---------------------------
-```
+```vim
 function! SCTags()
     if executable("sctags")
         let g:tagbar_ctags_bin = "sctags"
