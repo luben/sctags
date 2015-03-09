@@ -23,6 +23,7 @@ object SCTags extends Parsing with TagGeneration
       case ("-f" |"-o")         :: file :: rest => outputFile = file; parseOpt(rest)
       case ("-r" |"--recurse" ) :: rest => recurse = true;            parseOpt(rest)
       case ("-e" |"--etags"   ) :: rest => etags = true;              parseOpt(rest)
+      case ("--list-languages") :: rest => println("Scala"); Nil
       case ("-v" |"--version")  :: rest => println("Exuberant Ctags 5.9~fake"); Nil
       case files  => files
     }
@@ -50,17 +51,19 @@ object SCTags extends Parsing with TagGeneration
       }
     }
 
-    val tags = files.map(f => (f.getPath, generateTags(parse(f))))
-    val output = outputFile match {
-      case "-" => Console.out
-      case "tags" if etags =>  new PrintStream("TAGS")
-      case x => new PrintStream(x)
-    }
+    if (!files.isEmpty) {
+      val tags = files.map(f => (f.getPath, generateTags(parse(f))))
+      val output = outputFile match {
+        case "-" => Console.out
+        case "tags" if etags =>  new PrintStream("TAGS")
+        case x => new PrintStream(x)
+      }
 
-    if (etags) {
-      ETags.generate(tags, output)
-    } else {
-      CTags.generate(tags, output)
+      if (etags) {
+        ETags.generate(tags, output)
+      } else {
+        CTags.generate(tags, output)
+      }
     }
   }
 
