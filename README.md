@@ -1,4 +1,4 @@
-SCTags is ctags and etags extractor for scala language.
+SCTags is ctags and etags extractor for Scala language
 
 Usage
 -----
@@ -21,9 +21,11 @@ Copyright
 ----------
 
 This package is based on http://programmer-monk.net/darcs/repos/sctags
+
 It is simplified and extended to support scope tracking.
 
 Released under the Apache 2.0 License.
 
 Copyright 2008 Geoff Reedy 
-Copuright 2015 Luben Karavelov
+
+Copyright 2015 Luben Karavelov
