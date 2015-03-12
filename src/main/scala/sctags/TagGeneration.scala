@@ -81,7 +81,8 @@ trait TagGeneration { this: SCTags.type =>
           }
           t match {
             // Don't record method local values/variables
-            case ValDef(_,_,_,_) if path.head._1 == "method" => ;
+            case ValDef(_,_,_,_)  if path.head._1 == "method" =>
+            case TypeDef(_,_,_,_) if path.head._1 == "method" =>
             case _ =>
               // push scope to path
               scope(t).foreach(s => path.push(s -> name.get.decode))
