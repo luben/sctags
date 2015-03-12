@@ -67,9 +67,9 @@ trait TagGeneration { this: SCTags.type =>
         val col  = t.pos.column
         val text = t.pos.lineContent
         var fields: immutable.Map[String, String] = immutable.Map.empty
+        kind(t).foreach(fields += "kind" -> _)
         access(t).foreach(fields += "access" -> _)
         implementation(t).foreach(fields += "implementation" -> _)
-        kind(t).foreach(fields += "kind" -> _)
         val name = t match {
           case (dtree: DefTree) => Some(dtree.name)
           case _ => None
@@ -79,10 +79,14 @@ trait TagGeneration { this: SCTags.type =>
           if (!path.isEmpty) {
             fields += path.head._1 -> path.map(_._2).reverse.mkString(".")
           }
-          // push scope to path
-          scope(t).foreach(s => path.push(s -> name.get.decode))
-
-          addTag(TagPosition(line, col, text), name.get, fields)
+          t match {
+            // Don't record method local values/variables
+            case ValDef(_,_,_,_) if path.head._1 == "method" => ;
+            case _ =>
+              // push scope to path
+              scope(t).foreach(s => path.push(s -> name.get.decode))
+              addTag(TagPosition(line, col, text), name.get, fields)
+          }
         }
 
         super.traverse(t)

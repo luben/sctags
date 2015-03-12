@@ -4,7 +4,8 @@ import scala.collection.mutable.StringBuilder
 
 case class Tag(val name: String, pos: TagPosition, fields: Product2[String, String]*) {
   private def fieldString(field: Product2[String, String]) =
-    field._1 + ":" + escapeValue(field._2)
+    if (field._1 == "kind") escapeValue(field._2)
+      else field._1 + ":" + escapeValue(field._2)
 
   private def escapeValue(value: String) =
     (value.foldLeft(new StringBuilder) {(b, c) =>
