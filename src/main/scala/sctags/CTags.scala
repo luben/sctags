@@ -8,9 +8,9 @@ object CTags {
     def compare(that: String) = self.compareToIgnoreCase(that)
   }
 
-  private val header = Array(
+  private val header = List(
     "!_TAG_FILE_FORMAT\t2\t//",
-    "!_TAG_FILE_SORTED\t2\t/0=unsorted, 1=sorted, 2=sorted,casefold/"
+    "!_TAG_FILE_SORTED\t1\t/0=unsorted, 1=sorted, 2=sorted,casefold/"
   )
 
   private def formatTags(t: (String, Seq[Tag])) = {
@@ -23,7 +23,7 @@ object CTags {
   }
 
   def generate(tags: Seq[(String, Seq[Tag])], output: PrintStream) {
-    val tagStrings = (tags.flatMap(formatTags _) ++ header).sorted.toArray
+    val tagStrings = (header ++ tags.flatMap(formatTags _).sorted).toArray
     tagStrings foreach {l => output.println(l)}
   }
 }
