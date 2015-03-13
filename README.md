@@ -1,20 +1,35 @@
-SCTags is ctags and etags extractor for Scala language
+SCTags is ctags and etags extractor for Scala language. It will fallback
+to ctags if language other than Scala was forced
 
 Usage
 -----
 
 ```
-sctags [-f|-o file] [-r|--recurse] [-v|--version] <files>
+sctags [-f|-o file] [-R|--recurse] [--list-languages] [--version] <files>
 
 -f file | -o file
   sets the file the tags are written to, default is "tags"
   (Use "-" for standard output)
 
--r --recurse
+-R --recurse
   recurse through directories specified on the command line
 
--v --version
+--list-languages
+  list the supported languages (inlcuding the ctags suported ones)
+
+--language-force=lang
+  it will fall back to ctags if the lang is not Scala
+
+--version
   print fake version for exhuberant ctags compatibility
+```
+
+Build and Install
+-----------------
+```
+$ sbt assembly
+$ cp target/scala-2.11/sctags ~/bin
+
 ```
 
 Example Vim + TagBar config
