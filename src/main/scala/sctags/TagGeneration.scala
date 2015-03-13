@@ -59,7 +59,28 @@ trait TagGeneration { this: SCTags.type =>
         case ClassDef(m,_,_,_)              => Some("class")
         case DefDef(_,_,_,_,_,_)            => Some("method")
         case _ => None
+      }
 
+      def signature(t: Tree) = t match {
+        case DefDef(_,_,tparams,vparams,_,_)  =>
+          val tsig =  tparams.map(_.name.decode) match {
+            case List()  => ""
+            case tl:List[String] => tl.mkString("[",", ","]")
+          }
+          val psig = vparams.foldLeft(""){
+            (s,pl) =>
+              s + pl.map{
+                p => p.name.decode + ":" + p.tpt.toString
+              }.mkString("(",", ",")")
+          }
+          Some(tsig + psig)
+
+        case TypeDef(_,_,tparams,_) =>
+          tparams.map(_.name.decode) match {
+            case List()  => None
+            case tl:List[string] => Some(tl.mkString("[",", ","]"))
+          }
+        case _ => None
       }
 
       override def traverse(t: Tree): Unit = {
@@ -70,6 +91,7 @@ trait TagGeneration { this: SCTags.type =>
         kind(t).foreach(fields += "kind" -> _)
         access(t).foreach(fields += "access" -> _)
         implementation(t).foreach(fields += "implementation" -> _)
+        signature(t).foreach(fields += "signature" -> _)
         val name = t match {
           case (dtree: DefTree) => Some(dtree.name)
           case _ => None
@@ -90,7 +112,11 @@ trait TagGeneration { this: SCTags.type =>
           }
         }
 
-        super.traverse(t)
+        t match {
+          case TypeDef(_,_,_,_) =>  // Don't traverse type defs
+          case ValDef(_,_,_,_)  =>  // Don't traverse val defs
+          case _ => super.traverse(t)
+        }
 
         if (name.isDefined && fields.contains("kind")) {
           // pop scope from path
