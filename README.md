@@ -67,6 +67,37 @@ if has("autocmd")
 endif
 ```
 
+This will give you nice package/class/object/method hierarchy in Tagbar. Here is an example:
+
+```
+▼+types : package
+  ▼+Membership : trait
+     +C[T] : type
+     +T : type
+     +contains(a:C[T], b:T) : method
+  ▼+BloomFilterMembership : class
+     +T : type
+     +<init>() : method
+     +contains(a:BloomFilter[T], b:T) : m
+  ▼+MinMaxMembership : class
+     +T : type
+     +<init>() : method
+     +contains(a:MinMax[T], b:T) : metho
+  ▼+SetMembership : class
+     +T : type
+     +<init>() : method
+     +contains(a:Set[T], b:T) : method
+  ▼+MembershipOps : object
+    ▼+Contained : class
+       +C[T] : type
+       +T : type
+        [values]
+       -a
+       -tc
+       +<@(b:C[T]) : method
+       +<init>(a:T)(tc:Membership[T, C])
+```
+
 Copyright
 ----------
 
