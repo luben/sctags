@@ -21,10 +21,8 @@ object SCTags extends Parsing with TagGeneration
   def parseOpt(args:List[String]): List[String] =
     args match {
       case ("-f" |"-o")         :: file :: rest => outputFile = file; parseOpt(rest)
-      case ("-r" |"--recurse" ) :: rest => recurse = true;            parseOpt(rest)
+      case ("-R" |"--recurse" ) :: rest => recurse = true;            parseOpt(rest)
       case ("-e" |"--etags"   ) :: rest => etags = true;              parseOpt(rest)
-      case ("--list-languages") :: rest => println("Scala"); Nil
-      case ("-v" |"--version")  :: rest => println("Exuberant Ctags 5.9~fake"); Nil
       case files  => files
     }
 
