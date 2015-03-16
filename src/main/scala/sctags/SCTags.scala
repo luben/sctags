@@ -49,7 +49,7 @@ object SCTags extends Parsing with TagGeneration
       }
     }
 
-    if (!files.isEmpty) {
+    if (files.nonEmpty) {
       val tags = files.map(f => (f.getPath, generateTags(parse(f))))
       val output = outputFile match {
         case "-" => Console.out

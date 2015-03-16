@@ -98,7 +98,7 @@ trait TagGeneration { this: SCTags.type =>
         }
 
         if (name.isDefined && fields.contains("kind")) {
-          if (!path.isEmpty) {
+          if (path.nonEmpty) {
             fields += path.head._1 -> path.map(_._2).reverse.mkString(".")
           }
           t match {

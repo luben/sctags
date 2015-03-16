@@ -4,10 +4,6 @@ import java.io.PrintStream
 
 object CTags {
 
-  private class CaseInsensitiveOrder(val self: String) extends Ordered[String] {
-    def compare(that: String) = self.compareToIgnoreCase(that)
-  }
-
   private val header = List(
     "!_TAG_FILE_FORMAT\t2\t//",
     "!_TAG_FILE_SORTED\t1\t/0=unsorted, 1=sorted, 2=sorted,casefold/"
