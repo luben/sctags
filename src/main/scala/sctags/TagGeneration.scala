@@ -16,7 +16,8 @@ trait TagGeneration { this: SCTags.type =>
 
       def addTag(pos: TagPosition, name: Name, fields: Map[String, String]) {
         if (!name.decode.contains('$') && !name.decode.equals("this")) {
-          _tags += Tag(name.decode, pos, fields.toList: _*)
+          val fieldsList = "kind" -> fields("kind") :: fields.filterKeys(_ != "kind").toList
+          _tags += Tag(name.decode, pos, fieldsList: _*)
         }
       }
 
