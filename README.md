@@ -24,13 +24,18 @@ sctags [-f|-o file] [-R|--recurse] [--list-languages] [--version] <files>
   print fake version for exhuberant ctags compatibility
 ```
 
-Build and Install
+Build, Install and Running
 -----------------
 ```
 $ sbt assembly
 $ cp target/scala-2.11/sctags ~/bin
 
 ```
+
+The executable uncludes the compiled classes. iIt will look for
+the scala libraries relatively to the scala executable that should
+be on your $PATH.
+
 
 Example Vim + TagBar config
 ---------------------------
