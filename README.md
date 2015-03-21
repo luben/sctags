@@ -29,10 +29,9 @@ Build, Install and Running
 ```
 $ sbt assembly
 $ cp target/scala-2.11/sctags ~/bin
-
 ```
 
-The executable uncludes the compiled classes. iIt will look for
+The executable uncludes the compiled classes. It will look for
 the scala libraries relatively to the scala executable that should
 be on your $PATH.
 
