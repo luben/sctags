@@ -33,8 +33,9 @@ $ cp target/scala-2.11/sctags ~/bin
 
 The executable uncludes the compiled classes. It will look for
 the scala libraries relatively to the scala executable that should
-be on your $PATH.
-
+be on your $PATH. Other option is to set SCALA_HOME to the root
+of your Scala distribution or SCALA_LIB to the lib directory of
+SCALA_HOME.
 
 Example Vim + TagBar config
 ---------------------------
