@@ -1,6 +1,6 @@
 name := "sctags"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.12.1"
 
 version := "1.0"
 
