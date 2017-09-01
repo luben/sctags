@@ -22,7 +22,7 @@ case class Tag(val name: String, pos: TagPosition, fields: Product2[String, Stri
     if (fields.isEmpty) {
       ""
     } else {
-      (fields ++ Seq("Line"->pos.line.toString)).
+      (fields ++ Seq("line"->pos.line.toString)).
         map(fieldString).mkString(";\"\t", "\t", "")
     }
   override def toString =
