@@ -55,10 +55,10 @@ assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShe
     """      if [[ -L "$SCALA_BIN" ]]; then""",
     """        SCALA_BIN=$(readlink $SCALA_BIN)""",
     """      fi""",
-    """      SCALA_HOME="$(dirname $SCALA_BIN)/.."""",
+    """      SCALA_HOME=$(dirname "$SCALA_BIN")/..""",
     """      SCALA_LIB="$SCALA_HOME/lib"""",
     """    fi""",
     """  fi""",
-    """  exec java -Xbootclasspath/a:$SCALA_LIB/scala-compiler.jar:$SCALA_LIB/scala-library.jar:$SCALA_LIB/scala-reflect.jar -jar "$CMD" ${ARGS[@]}""",
+    """  exec java -Xbootclasspath/"a:$SCALA_LIB/scala-compiler.jar:$SCALA_LIB/scala-library.jar:$SCALA_LIB/scala-reflect.jar" -jar "$CMD" ${ARGS[@]}""",
     """fi"""
   )))
