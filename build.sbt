@@ -53,7 +53,7 @@ assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShe
     """         exit 1;""",
     """      fi""",
     """      if [[ -L "$SCALA_BIN" ]]; then""",
-    """        SCALA_BIN=$(readlink $SCALA_BIN)""",
+    """        SCALA_BIN=$(readlink -f $SCALA_BIN)""",
     """      fi""",
     """      SCALA_HOME=$(dirname "$SCALA_BIN")/..""",
     """      SCALA_LIB="$SCALA_HOME/lib"""",
